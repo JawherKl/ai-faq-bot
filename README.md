@@ -53,7 +53,7 @@ npm install
 Create a `.env` file in the root directory:  
 ```ini
 PORT=3000
-BASE_URL=https://api.deepseek.com/v1/chat/completions
+BASE_URL=https://openrouter.ai/api/v1
 API_KEY=your-api-key-here
 ```
 
