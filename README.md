@@ -22,11 +22,11 @@ It follows best practices for a scalable and maintainable backend, inspired by t
 ai-faq-bot/
 │── src/
 │   ├── config/
-│   │   ├── openConfig.js   # OpenAI (DeepSeek) API configuration  
+│   │   ├── openConfig.js   # OpenAI (OpenAI) API configuration  
 │   ├── controllers/
 │   │   ├── faqController.js # Handles user requests  
 │   ├── services/
-│   │   ├── faqService.js # Calls DeepSeek API  
+│   │   ├── faqService.js # Calls OpenAI API  
 │   ├── routes/
 │   │   ├── faqRoutes.js # Defines API endpoints  
 │── .env  # API keys and environment variables  
@@ -72,12 +72,12 @@ The API will run at `http://localhost:3000`.
 ```sh
 curl -X POST http://localhost:3000/api/faq/ask \
      -H "Content-Type: application/json" \
-     -d '{"question": "What is DeepSeek AI?"}'
+     -d '{"model": "models-name-example","question": "What is OpenAI AI?"}'
 ```
 **Response:**  
 ```json
 {
-  "answer": "DeepSeek AI is an advanced AI model providing intelligent responses..."
+  "answer": "OpenAI AI is an advanced AI model providing intelligent responses..."
 }
 ```
 
