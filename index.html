@@ -4,128 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI FAQ Bot</title>
-    <link rel="icon" href="images/bot.png" />
+    <link rel="icon" href="images/bot.png"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
-    <style>
-        :root {
-            --bg-color: #f8f9fa;
-            --text-color: #212529;
-            --card-bg: white;
-            --border-color: rgba(0, 0, 0, 0.1);
-            --btn-bg: #007bff;
-            --btn-text: white;
-        }
-
-        body.dark-mode {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --border-color: rgba(255, 255, 255, 0.2);
-            --btn-bg: #0d6efd;
-            --btn-text: white;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .container {
-            max-width: 900px;
-            margin-top: 50px;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px var(--border-color);
-            transition: background 0.3s, box-shadow 0.3s;
-        }
-
-        .btn-primary {
-            background-color: var(--btn-bg);
-            border-color: var(--btn-bg);
-            color: var(--btn-text);
-        }
-
-        .btn-primary:hover {
-            background-color: darken(var(--btn-bg), 10%);
-        }
-
-        .form-control, .form-select {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-        }
-
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .spinner-border {
-            display: none;
-        }
-
-        #response-card {
-            display: none;
-        }
-
-        pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            background: var(--border-color);
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-
-        .toggle-switch {
-            display: inline-flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-
-        .toggle-switch input {
-            display: none;
-        }
-
-        .toggle-switch label {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .toggle-switch .slider {
-            width: 40px;
-            height: 20px;
-            background: var(--border-color);
-            border-radius: 50px;
-            position: relative;
-            transition: background 0.3s;
-        }
-
-        .toggle-switch input:checked + .slider {
-            background: #0d6efd;
-        }
-
-        .toggle-switch .slider::before {
-            content: "";
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: 0.3s;
-        }
-
-        .toggle-switch input:checked + .slider::before {
-            transform: translateX(20px);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container text-center">
@@ -170,68 +52,13 @@
             </div>
             <div class="card-body">
                 <p id="response-text"></p>
-                <button class="btn btn-sm btn-secondary mt-2" data-bs-toggle="collapse" data-bs-target="#rawResponse">View Raw JSON</button>
+                <button class="btn btn-sm btn-secondary mt-2" onclick="toggleRawJson()">View Raw JSON</button>
                 <div class="collapse mt-2" id="rawResponse">
                     <pre id="raw-json"></pre>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // Dark Mode Toggle Functionality
-        document.getElementById("darkModeToggle").addEventListener("change", function() {
-            document.body.classList.toggle("dark-mode");
-            localStorage.setItem("dark-mode", document.body.classList.contains("dark-mode"));
-        });
-
-        // Load Dark Mode Preference
-        if (localStorage.getItem("dark-mode") === "true") {
-            document.body.classList.add("dark-mode");
-            document.getElementById("darkModeToggle").checked = true;
-        }
-
-        async function askAI() {
-            const modelSelect = document.getElementById("modelSelect");
-            const questionInput = document.getElementById("question");
-            const responseText = document.getElementById("response-text");
-            const rawJson = document.getElementById("raw-json");
-            const responseCard = document.getElementById("response-card");
-            const loadingSpinner = document.getElementById("loadingSpinner");
-            const askBtn = document.getElementById("askBtn");
-
-            const selectedModel = modelSelect.value;
-            const question = questionInput.value.trim();
-
-            if (!question) {
-                responseText.innerHTML = "<span class='text-danger'>Please enter a question.</span>";
-                responseCard.style.display = "block";
-                return;
-            }
-
-            askBtn.disabled = true;
-            loadingSpinner.style.display = "inline-block";
-            responseCard.style.display = "none";
-
-            try {
-                const response = await fetch("http://localhost:3000/api/faq/ask", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ model: selectedModel, question })
-                });
-
-                const data = await response.json();
-                responseText.innerHTML = marked.parse(data.answer);
-                rawJson.innerText = JSON.stringify(data, null, 2);
-                responseCard.style.display = "block";
-            } catch (error) {
-                responseText.innerHTML = "<span class='text-danger'>Error fetching response.</span>";
-                responseCard.style.display = "block";
-            }
-
-            askBtn.disabled = false;
-            loadingSpinner.style.display = "none";
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
