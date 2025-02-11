@@ -1,6 +1,6 @@
 # 🤖 AI-powered FAQ Bot  
 
-![openai-nodejs](https://github.com/JawherKl/ai-faq-bot/blob/main/images/ai-faq-bot.png)
+![openai-nodejs](https://github.com/JawherKl/ai-faq-bot/blob/main/images/ai-chat.jpg)
 
 AI-powered FAQ Bot is a backend solution built with **Node.js (Express)** that integrates with **OpenAI** to provide AI-generated answers to user queries.  
 It follows best practices for a scalable and maintainable backend, inspired by the structure of my other repository [ai-models-integration](https://github.com/JawherKl/ai-models-integration).  
@@ -96,6 +96,12 @@ curl -X POST http://localhost:3000/api/faq/ask \
 - ✅ Implement **Redis caching** for frequent queries  
 - ✅ Add **database support** (MongoDB, PostgreSQL) for logging questions  
 - ✅ Deploy on **Railway, Render, or Vercel**  
+
+---
+
+## 🤖 Demo Interface
+
+![openai-nodejs](https://github.com/JawherKl/ai-faq-bot/blob/main/images/ai-faq-bot.png)
 
 ---
 
