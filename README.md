@@ -59,7 +59,7 @@ API_KEY=your-api-key-here
 
 ### **4️⃣ Start the Server**  
 ```sh
-node server.js
+npm start
 ```
 The API will run at `http://localhost:3000`.
 
