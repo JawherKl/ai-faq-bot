@@ -112,7 +112,8 @@ If you’d like to improve this project, feel free to fork the repo and submit a
 
 ## 📄 License  
 This project is open-source and available under the [MIT License](LICENSE).  
-
+<!--
 ---
 
 🚀 **Built with ❤️ by [JawherKl](https://github.com/JawherKl)**
+-->
